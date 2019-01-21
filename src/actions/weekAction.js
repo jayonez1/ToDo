@@ -1,25 +1,43 @@
 import moment from "moment"
 
-export const SWICH_TAB = "SWICH_TAB";
-export const NEXT_WEEK = "NEXT_WEEK";
+export const SWITCH_TAB = "SWITCH_TAB";
+export const SWITCH_WEEK = "SWITCH_WEEK";
+export const RESET_WEEK = "RESET_WEEK";
 
 export const switchTabs = (tabId) => dispatch => {
-  dispatch({ type: SWICH_TAB, payload:tabId })
+  dispatch({ type: SWITCH_TAB, payload:tabId })
 }
 
-
-// Пофиксить переход на след неделю !!!!
+export const resetWeek = () => dispatch => {
+  dispatch({ type: RESET_WEEK })
+}
 
 export const nextWeek = (weekDays) => dispatch => {
-  const {first, last} = weekDays;
-
+  const {selectFirst, selectLast} = weekDays;
+  const firstWeekDate = moment(selectFirst, "DD-MM-YYYY").add(1, 'week').format("DD-MM-YYYY");
+  const lastWeekDate = moment(selectLast, "DD-MM-YYYY").add(1, 'week').format("DD-MM-YYYY")
   const payload = {
-    firstWeekDate: moment(first, "DD-MM-YYYY").add(1, 'week').format("DD-MM-YYYY"),
-    lastWeekDate: moment(last, "DD-MM-YYYY").add(1, 'week').format("DD-MM-YYYY"),
-    selectDay: (moment().isoWeek() === moment(first, "DD-MM-YYYY").isoWeek())
+    firstWeekDate,
+    lastWeekDate,
+    selectDay: (moment().isoWeek() === moment(firstWeekDate, "DD-MM-YYYY").isoWeek())
       ? moment().isoWeekday()
-      : 6
+      : 1
   }
 
-  dispatch({ type: NEXT_WEEK, payload })
+  dispatch({ type: SWITCH_WEEK, payload })
+}
+
+export const prevWeek = (weekDays) => dispatch => {
+  const {selectFirst, selectLast} = weekDays;
+  const firstWeekDate = moment(selectFirst, "DD-MM-YYYY").subtract(1, 'week').format("DD-MM-YYYY");
+  const lastWeekDate = moment(selectLast, "DD-MM-YYYY").subtract(1, 'week').format("DD-MM-YYYY")
+  const payload = {
+    firstWeekDate,
+    lastWeekDate,
+    selectDay: (moment().isoWeek() === moment(firstWeekDate, "DD-MM-YYYY").isoWeek())
+      ? moment().isoWeekday()
+      : 1
+  }
+
+  dispatch({ type: SWITCH_WEEK, payload })
 }

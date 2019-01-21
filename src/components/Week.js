@@ -4,16 +4,29 @@ const TabPane = Tabs.TabPane;
 
 class Week extends Component {
   render() {
-    const {week, nextWeek, switchTabs} = this.props;
+    const {week, nextWeek, prevWeek, resetWeek, switchTabs} = this.props;
 
     return (
       <div>
         <p>Неделя с { week.firstWeekDate } по { week.lastWeekDate }</p>
         <button
           onClick={ () =>
+            prevWeek({
+              selectFirst: week.firstWeekDate,
+              selectLast: week.lastWeekDate
+            })
+          }
+        >Пред. неделя</button>
+        <button
+          onClick={ () =>
+            resetWeek()
+          }
+        >Сбросить</button>
+        <button
+          onClick={ () =>
             nextWeek({
-              first: week.firstWeekDate,
-              last: week.lastWeekDate
+              selectFirst: week.firstWeekDate,
+              selectLast: week.lastWeekDate
             })
           }
         >След. неделя</button>

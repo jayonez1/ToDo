@@ -1,7 +1,8 @@
 import moment from "moment"
 import {
-  NEXT_WEEK,
-  SWICH_TAB
+  SWITCH_WEEK,
+  RESET_WEEK,
+  SWITCH_TAB
 } from "../actions/weekAction"
 
 const initialStateWeek = {
@@ -15,12 +16,14 @@ const initialStateWeek = {
 
 export function week(state = initialStateWeek, action) {
   switch (action.type) {
-    case NEXT_WEEK:
+    case SWITCH_WEEK:
       return{
         ...state,
         ...action.payload
       };
-    case SWICH_TAB:
+    case RESET_WEEK:
+      return initialStateWeek;
+    case SWITCH_TAB:
       return{
         ...state,
         selectDay: action.payload,
