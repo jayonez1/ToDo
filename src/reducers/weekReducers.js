@@ -6,7 +6,8 @@ import {
 } from "../actions/weekAction"
 
 const initialStateWeek = {
-  selectDay: moment().isoWeekday(),
+  selectDay: moment().format("DD-MM-YYYY"),
+  selectTabs: moment().isoWeekday(),
   todayNumWeek: moment().isoWeekday(),
   todayDateWeek: moment().format("DD-MM-YYYY"),
   firstWeekDate: moment().isoWeekday(1).format("DD-MM-YYYY"),
@@ -26,7 +27,7 @@ export function week(state = initialStateWeek, action) {
     case SWITCH_TAB:
       return{
         ...state,
-        selectDay: action.payload,
+        ...action.payload,
       };
     default:
       return state
