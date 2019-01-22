@@ -8,8 +8,6 @@ import {
 const initialStateWeek = {
   selectDay: moment().format("DD-MM-YYYY"),
   selectTabs: moment().isoWeekday(),
-  todayNumWeek: moment().isoWeekday(),
-  todayDateWeek: moment().format("DD-MM-YYYY"),
   firstWeekDate: moment().isoWeekday(1).format("DD-MM-YYYY"),
   lastWeekDate: moment().isoWeekday(7).format("DD-MM-YYYY")
 }
