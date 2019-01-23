@@ -1,6 +1,6 @@
 const initialTasks = {
-  "21-01-2019":[
-    {id: 1, title: "Бла Бла 1", description: "Описание Бла Бла 1", start: "123", over: "321", rate:5},
+  "24-01-2019":[
+    {id: 1, title: "Бла Бла 1", description: "Описание Бла Бла 1", start: "123", over: "321", rate:5, participants:["Алексей", "Юрий", "Валера"]},
     {id: 5, title: "Бла Бла 12", description: "Описание Бла Бла 12", start: "123", over: "321", rate:2},
     {id: 4, title: "Бла Бла 13", description: "Описание Бла Бла 13", start: "123", over: "321", rate:3}
   ],

@@ -32,7 +32,7 @@ class Week extends PureComponent {
             })
           }
         >След. неделя</button>
-        <Tabs activeKey={ week.selectTabs.toString() } animated={ false } onTabClick={  (tabKey) => switchTabs(tabKey, week.firstWeekDate)  }>
+        <Tabs activeKey={ week.selectTabs.toString() } animated={ true } onTabClick={  (tabKey) => switchTabs(tabKey, week.firstWeekDate)  }>
           <TabPane tab="Понедельник" key="1"> <Tasks selectDay={ week.selectDay }/> </TabPane>
           <TabPane tab="Вторник" key="2"> <Tasks selectDay={ week.selectDay }/> </TabPane>
           <TabPane tab="Среда" key="3"> <Tasks selectDay={ week.selectDay }/> </TabPane>

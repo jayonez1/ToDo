@@ -1,31 +1,33 @@
 import React, { PureComponent } from 'react';
-import { Table, Empty, Button, Icon } from 'antd';
+import { Table, Empty, Button, Icon, List } from 'antd';
+import DrawerForm from '../containers/DrawerForm'
 
 const columns = [
   { title: 'Название задачи', dataIndex: 'title', key: 'title' },
-  { title: 'Описание', dataIndex: 'description', key: 'description' },
-  { title: 'Начало', dataIndex: 'start', key: 'start' },
-  { title: 'Окончание', dataIndex: 'over', key: 'over' },
-  { title: 'Важность', dataIndex: 'rate', key: 'rate' },
-  {
-    title: 'Action', dataIndex: '', key: 'x', render: () => <a href="javascript:;">Delete</a>,
-  },
+  { title: 'Начало', dataIndex: 'start', key: 'start', align:"center" },
+  { title: 'Окончание', dataIndex: 'over', key: 'over', align:"center" },
+  { title: 'Важность', dataIndex: 'rate', key: 'rate', align:"center" },
+  { title: 'Кол-во участников', dataIndex: 'numberParticipants', key: 'numberParticipants', align:"center" },
+  { title: '', dataIndex: 'editTast', key: 'editTast', align:"center"  },
 ];
 
 
 class Tasks extends PureComponent {
   createDataTable = () => {
-    const { tasks, selectDay } = this.props;
-    console.log(tasks[selectDay]);
+    const { tasks, selectDay, editTask } = this.props;
+    const getRate = (rate) => <div>{rate} <Icon type="star" /></div>
     if ( tasks[selectDay] ) {
       return tasks[selectDay].map(task => (
         {
           key: task.id,
           title: task.title,
-          description: task.description,
           start: task.start,
           over: task.over,
-          rate: task.rate
+          rate: getRate(task.rate),
+          numberParticipants: (task.participants) ? task.participants.length : 0,
+          description: task.description,
+          participants: (task.participants) ? task.participants : [],
+          editTast: <span style={{cursor:"pointer"}} onClick={ () => editTask(task.id) }>Редактировать</span>
         }
       ))
     }
@@ -33,22 +35,38 @@ class Tasks extends PureComponent {
   }
   render() {
     const dataTable = this.createDataTable()
+    const { newTask } = this.props
     return (
       <div>
-        {
-          (dataTable)
-          ?
-            <Table
-              columns={columns}
-              expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}
-              dataSource={dataTable}
-            />
-          :
-            <Empty>
-              <Button>Создать Task</Button>
-            </Empty>
-
-        }
+        <DrawerForm />
+        <div className="taskTable">
+          {
+            (dataTable)
+            ?
+              <Table
+                columns={columns}
+                dataSource={dataTable}
+                expandedRowRender={
+                  record =>
+                    <div style={{ margin: 0 }}>
+                      <p>Описание задачи: {record.description}</p>
+                      <h4 style={{ margin: '16px 0' }}>Участники: </h4>
+                      <List
+                        size="small"
+                        bordered
+                        dataSource={record.participants}
+                        className="taskTable__participantsList"
+                        renderItem={item => (<List.Item>{item}</List.Item>)}
+                      />
+                    </div>
+                }
+              />
+            :
+              <Empty>
+                <Button onClick={ () => newTask() }>Создать задачу</Button>
+              </Empty>
+          }
+        </div>
       </div>
 
     );
