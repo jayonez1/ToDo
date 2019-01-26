@@ -1,18 +1,39 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: "Roboto";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+a, a:active, a:hover, a:visited { outline: none!important; text-decoration: none!important; }
 
 .taskTable__participantsList .ant-list-empty-text{
   height: 100px!important;
 }
 .taskTable__participantsList .ant-empty-normal{
   margin: 0!important;
+}
+.data__form .ant-row{
+  margin-bottom: 0px!important;
+}
+.ant-form-item-label{
+  line-height:30px!important;
+}
+.ant-form-item{
+  margin-bottom: 0!important;
+}
+.ant-select, .ant-input-number, .ant-calendar-picker{
+  width: 100%!important;
+}
+.form__botomButton{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .week__controls{

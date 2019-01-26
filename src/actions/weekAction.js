@@ -1,5 +1,5 @@
 import moment from "moment";
-import { getAllTasks, postTask } from '../fakeAPI';
+import { getAllTasks, postTask, putTask, deleteTask } from '../fakeAPI';
 import {
   DRIWER_FORM_CLOSE,
   NOTIFICATION_CREATE_OK,
@@ -115,6 +115,53 @@ export const sendCreate = (body, selectDay) => dispatch => {
     });
     dispatch({
      type: NOTIFICATION_CREATE_OK,
+   });
+  } catch (e) {
+    dispatch({
+      type: TASKS_ON_DAY,
+      payload: []
+    });
+    dispatch({
+     type: NOTIFICATION_ERROR,
+     payload: e
+   });
+  }
+}
+
+export const sendEdit = (body, selectDay) => dispatch => {
+  try {
+    putTask(body);
+    dispatch({
+      type: TASKS_ON_DAY,
+      payload: searchTasks(selectDay)
+    })
+    dispatch({
+     type: NOTIFICATION_EDIT_OK,
+   });
+  } catch (e) {
+    dispatch({
+      type: TASKS_ON_DAY,
+      payload: []
+    });
+    dispatch({
+     type: NOTIFICATION_ERROR,
+     payload: e
+   });
+  }
+}
+
+export const sendDelete = (id, selectDay) => dispatch => {
+  try {
+    deleteTask(id);
+    dispatch({
+      type: TASKS_ON_DAY,
+      payload: searchTasks(selectDay)
+    })
+    dispatch({
+     type: NOTIFICATION_DELETE_OK,
+   });
+   dispatch({
+     type: DRIWER_FORM_CLOSE
    });
   } catch (e) {
     dispatch({

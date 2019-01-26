@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from "moment"
 import {
-  Form, Input, Popconfirm, Button, DatePicker
+  Form, Input, Popconfirm, Button, DatePicker, Rate
 } from 'antd';
 import locale from 'antd/lib/date-picker/locale/ru_RU';
 
@@ -100,8 +100,22 @@ const FormDefault = Form.create({
               showTime={{ format: 'HH:mm' }}
               format="DD-MM-YYYY HH:mm"
               placeholder={['Начало', 'Окончание']}
+              onChange={(value) => onChangeDateTime(value)}
               onOk={(value) => onChangeDateTime(value)}
             />
+          )
+        }
+      </Form.Item>
+      <Form.Item label="Рейтинг задачи" >
+        {
+          getFieldDecorator("rate", {
+            initialValue: 0,
+            rules: [{
+               required: true,
+               message: "Задайте задаче рейтинг"
+             }]
+          })(
+            <Rate onChange={(value) => {props.onChangeItem({ nameField: "rate", value })}} />
           )
         }
       </Form.Item>

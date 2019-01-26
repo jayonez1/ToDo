@@ -25,7 +25,7 @@ class Tasks extends PureComponent {
           numberParticipants: (task.participants) ? task.participants.length : 0,
           description: task.description || "",
           participants: task.participants || [],
-          editTast: <span style={{cursor:"pointer"}} onClick={ () => editTask({id: task.id, editProps: tasks}) } >Редактировать</span>
+          editTast: <span style={{cursor:"pointer"}} onClick={ () => editTask({id: task.id, editProps: tasks}) } >Ред / Удл</span>
         }
       )
     )

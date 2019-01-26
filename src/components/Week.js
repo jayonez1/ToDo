@@ -74,8 +74,8 @@ class Week extends PureComponent {
           dataSource={form}
           onChangeItem={ (changes) => onChangeForm(changes) }
           sendCreate={(value) => sendCreate(value, week.selectDay)}
-          sendEdit={(value) => sendEdit(value)}
-          deleteItem={(id) => sendDelete(id)}
+          sendEdit={(value) => sendEdit(value, week.selectDay)}
+          deleteItem={(id) => sendDelete(id, week.selectDay)}
         />
       </div>
     );

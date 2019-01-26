@@ -25,7 +25,7 @@ class DrawerForm extends React.PureComponent {
           title={(this.props.dataSource.nameForm) ? this.props.dataSource.nameForm : ""}
           placement="right"
           closable={true}
-          width={640}
+          width={400}
           onClose={() => this.props.closeDriwerForm()}
           visible={this.props.driwerForm}
         >

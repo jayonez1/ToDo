@@ -12,3 +12,16 @@ export const postTask = (body) => {
   const serialTasks = JSON.stringify(tasks);
   localStorage.setItem("tasks", serialTasks);
 }
+
+export const putTask = (body) => {
+  const tasks = getAllTasks();
+  const newTasks = tasks.map(task => (task.id === body.id) ? body : task);
+  const serialTasks = JSON.stringify(newTasks);
+  localStorage.setItem("tasks", serialTasks);
+}
+
+export const deleteTask = (id) => {
+  const tasks = getAllTasks().filter(task => task.id !== id);
+  const serialTasks = JSON.stringify(tasks);
+  localStorage.setItem("tasks", serialTasks);
+}
