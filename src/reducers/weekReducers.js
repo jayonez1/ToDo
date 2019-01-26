@@ -3,7 +3,10 @@ import {
   SWITCH_WEEK,
   RESET_WEEK,
   SWITCH_TAB,
-  TASKS_ON_DAY
+  TASKS_ON_DAY,
+  NEW_EL,
+  SET_EDIT,
+  EDIT_FIELD
 } from "../actions/weekAction"
 
 const initialStateWeek = {
@@ -37,5 +40,31 @@ export function weekTasksOnDay(state = [], action) {
       return action.payload;
     default:
       return state
+  }
+}
+
+export function weekForm (state = {}, action) {
+  switch (action.type) {
+    case NEW_EL:
+      return {
+        nameForm: "Создание",
+        typeForm: "create",
+      }
+    case SET_EDIT:
+      return {
+        nameForm: "Редактирование",
+        typeForm: "edit",
+        ...action.payload
+      }
+    case EDIT_FIELD: {
+      const newState = {...state}
+      newState[action.payload.nameField] = action.payload.value
+      if (action.payload.additionalNameField) { // Если есть еще одни параметр для обновления
+        newState[action.payload.additionalNameField] = action.payload.additionalValue
+      }
+      return newState
+    }
+    default:
+      return state;
   }
 }

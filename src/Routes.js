@@ -12,7 +12,7 @@ import {
 } from 'antd';
 
 const {
-  Content, Footer, Sider,
+  Content, Sider,
 } = Layout;
 const SubMenu = Menu.SubMenu;
 
@@ -59,9 +59,6 @@ class Routers extends React.Component {
                 </Switch>
               </div>
             </Content>
-            <Footer style={{ textAlign: 'center' }}>
-
-            </Footer>
           </Layout>
         </Layout>
       </App>

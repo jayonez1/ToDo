@@ -1,5 +1,6 @@
 import React from 'react';
 import { Drawer, notification } from 'antd';
+import FormDefault from './FormDefault'
 
 class DrawerForm extends React.PureComponent {
 
@@ -21,14 +22,14 @@ class DrawerForm extends React.PureComponent {
     return (
       <div>
         <Drawer
-          title={(this.props.nameForm) ? this.props.nameForm : ""}
+          title={(this.props.dataSource.nameForm) ? this.props.dataSource.nameForm : ""}
           placement="right"
           closable={true}
           width={640}
           onClose={() => this.props.closeDriwerForm()}
           visible={this.props.driwerForm}
         >
-          123
+          <FormDefault {...this.props} />
         </Drawer>
       </div>
     );

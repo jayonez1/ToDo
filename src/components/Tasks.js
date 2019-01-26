@@ -12,18 +12,20 @@ const columns = [
 
 class Tasks extends PureComponent {
   createDataTable = () => {
-    const { tasks } = this.props;
+    const { tasks, editTask } = this.props;
     const getRate = (rate) => <div>{rate} <Icon type="star" /></div>;
     return tasks.map(
       task => (
         {
           key: task.id,
           title: task.title,
-          rate: getRate((task.rate) ? task.rate : 0),
+          start: task.dateTimeStart || null,
+          over: task.dateTimeOver || null,
+          rate: getRate(task.rate || 0),
           numberParticipants: (task.participants) ? task.participants.length : 0,
-          description: (task.description) ? task.description : "",
-          participants: (task.participants) ? task.participants : [],
-          editTast: <span style={{cursor:"pointer"}} >Редактировать</span>
+          description: task.description || "",
+          participants: task.participants || [],
+          editTast: <span style={{cursor:"pointer"}} onClick={ () => editTask({id: task.id, editProps: tasks}) } >Редактировать</span>
         }
       )
     )
