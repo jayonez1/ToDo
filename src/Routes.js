@@ -4,17 +4,15 @@ import { Link } from 'react-router-dom';
 
 import App from './containers/App';
 import WeekPage from './containers/WeekPage';
-import SecondPage from './containers/SecondPage';
-
 
 import routes from "./constants/routes.json"
 
 import {
-  Layout, Menu, Breadcrumb, Icon,
+  Layout, Menu, Icon,
 } from 'antd';
 
 const {
-  Header, Content, Footer, Sider,
+  Content, Footer, Sider,
 } = Layout;
 const SubMenu = Menu.SubMenu;
 

@@ -5,7 +5,8 @@ import * as weekActions from '../actions/weekAction';
 
 function mapStateToProps(state) {
   return {
-    week: state.week
+    week: state.week,
+    tasks: state.weekTasksOnDay
   };
 }
 
