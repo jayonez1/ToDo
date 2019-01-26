@@ -1,5 +1,8 @@
 import moment from "moment";
 import { getAllTasks } from '../fakeAPI';
+import {
+  DRIWER_FORM_OPEN
+} from './drawerFormActions'
 
 export const SWITCH_TAB = "SWITCH_TAB";
 export const SWITCH_WEEK = "SWITCH_WEEK";
@@ -87,4 +90,8 @@ export const prevWeek = (weekDays) => dispatch => {
   }
 
   dispatch({ type: SWITCH_WEEK, payload })
+}
+
+export const createTask = () => dispatch => {
+  dispatch({ type: DRIWER_FORM_OPEN })
 }

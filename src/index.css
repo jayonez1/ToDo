@@ -14,3 +14,14 @@ code {
 .taskTable__participantsList .ant-empty-normal{
   margin: 0!important;
 }
+
+.week__controls{
+  display: flex;
+  justify-content: space-between;
+}
+.controls__weekChange button{
+  margin-right: 5px;
+}
+.controls__newTask{
+  align-self: flex-end;
+}
