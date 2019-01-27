@@ -75,7 +75,7 @@ const FormDefault = Form.create({
                required: true,
                message: "Введите название"
              }]
-          })( <Input maxLength={40} onChange={(e) => {props.onChangeItem({ nameField: "title", value: e.target.value })}} /> )
+          })( <Input maxLength={30} onChange={(e) => {props.onChangeItem({ nameField: "title", value: e.target.value })}} /> )
         }
       </Form.Item>
       <Form.Item label="Описание" >
