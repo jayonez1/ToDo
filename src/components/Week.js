@@ -17,8 +17,8 @@ class Week extends PureComponent {
     } = this.props;
     return (
       <div>
-        <div className="week__controls">
-          <div className="controls__weekChange">
+        <div className="table__controls">
+          <div className="controls__change">
             <p>Неделя с { week.firstWeekDate } по { week.lastWeekDate }</p>
             <Button
               onClick={ () =>

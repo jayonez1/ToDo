@@ -16,11 +16,18 @@ export const NEW_EL = "NEW_EL-LIST";
 export const SET_EDIT = "SET_EDIT-LIST";
 export const EDIT_FIELD = "EDIT_FIELD-LIST";
 
-
+const searchTasks = (key) => {
+  const tasks = []
+  if (key === "today") tasks.push(...searchTasksToday());
+  if (key === "tomorrow") tasks.push(...searchTasksTomorrow());
+  if (key === "week") tasks.push(...searchTasksWeek());
+  if (key === "month") tasks.push(...searchTasksMonth());
+  if (key === "year") tasks.push(...searchTasksYear());
+  return tasks
+}
 const searchTasksOneDay = (date) => getAllTasks().filter( task =>
   moment(task.dateTimeStart, "DD-MM-YYYY HH:mm").format("DD-MM-YYYY") === date
 )
-
 const searchTasksToday = () => searchTasksOneDay(moment().format("DD-MM-YYYY"));
 const searchTasksTomorrow = () => searchTasksOneDay(moment().day(1).format("DD-MM-YYYY"));
 const searchTasksWeek = () => {
@@ -53,12 +60,7 @@ const searchTasksYear = () => {
 
 
 export const switchTabs = (tabKey) => dispatch => {
-  const tasks = []
-  if (tabKey === "today") tasks.push(...searchTasksToday());
-  if (tabKey === "tomorrow") tasks.push(...searchTasksTomorrow());
-  if (tabKey === "week") tasks.push(...searchTasksWeek());
-  if (tabKey === "month") tasks.push(...searchTasksMonth());
-  if (tabKey === "year") tasks.push(...searchTasksYear());
+  const tasks = searchTasks(tabKey)
   dispatch({
     type: TASKS_ON_DAYS,
     payload: tasks
@@ -74,7 +76,7 @@ export const switchTabs = (tabKey) => dispatch => {
 export const resetList = () => dispatch => {
   dispatch({
     type: TASKS_ON_DAYS,
-    payload: searchTasksToday()
+    payload: searchTasks("today")
   })
   dispatch({
     type: RESET_LIST,
@@ -98,4 +100,76 @@ export const editTask = (props) => dispatch => {
 
 export const onChangeForm = (changes) => dispatch => {
   dispatch({ type: EDIT_FIELD, payload: changes })
+}
+
+export const sendCreate = (body, selectTabs) => dispatch => {
+  try {
+    postTask(body);
+    dispatch({
+      type: TASKS_ON_DAYS,
+      payload: searchTasks(selectTabs)
+    })
+    dispatch({
+      type: DRIWER_FORM_CLOSE
+    });
+    dispatch({
+     type: NOTIFICATION_CREATE_OK,
+   });
+  } catch (e) {
+    dispatch({
+      type: TASKS_ON_DAYS,
+      payload: []
+    });
+    dispatch({
+     type: NOTIFICATION_ERROR,
+     payload: e
+   });
+  }
+}
+
+export const sendEdit = (body, selectTabs) => dispatch => {
+  try {
+    putTask(body);
+    dispatch({
+      type: TASKS_ON_DAYS,
+      payload: searchTasks(selectTabs)
+    })
+    dispatch({
+     type: NOTIFICATION_EDIT_OK,
+   });
+  } catch (e) {
+    dispatch({
+      type: TASKS_ON_DAYS,
+      payload: []
+    });
+    dispatch({
+     type: NOTIFICATION_ERROR,
+     payload: e
+   });
+  }
+}
+
+export const sendDelete = (id, selectTabs) => dispatch => {
+  try {
+    deleteTask(id);
+    dispatch({
+      type: TASKS_ON_DAYS,
+      payload: searchTasks(selectTabs)
+    })
+    dispatch({
+     type: NOTIFICATION_DELETE_OK,
+   });
+   dispatch({
+     type: DRIWER_FORM_CLOSE
+   });
+  } catch (e) {
+    dispatch({
+      type: TASKS_ON_DAYS,
+      payload: []
+    });
+    dispatch({
+     type: NOTIFICATION_ERROR,
+     payload: e
+   });
+  }
 }

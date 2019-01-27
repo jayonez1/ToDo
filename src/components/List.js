@@ -17,7 +17,8 @@ class Month extends PureComponent {
     } = this.props;
     return (
       <div>
-        <div className="week__controls">
+        <div className="table__controls">
+          <div/>
           <div className="controls__newTask">
             <Button onClick={ () => createTask() }>Создать задачу</Button>
           </div>

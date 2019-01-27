@@ -36,11 +36,11 @@ a, a:active, a:hover, a:visited { outline: none!important; text-decoration: none
   justify-content: space-between;
 }
 
-.week__controls{
+.table__controls{
   display: flex;
   justify-content: space-between;
 }
-.controls__weekChange button{
+.controls__change button{
   margin-right: 5px;
 }
 .controls__newTask{
