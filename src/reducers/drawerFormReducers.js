@@ -34,21 +34,21 @@ export function formNotification(state = initialStateNotification, action) {
         ...initialStateNotification,
         open: true,
         type:"success",
-        message: "Объект Создан"
+        message: "Задача создана"
       }
     case NOTIFICATION_EDIT_OK:
       return {
         ...initialStateNotification,
         open: true,
         type:"success",
-        message: "Объект изменен"
+        message: "Задача изменена"
       }
     case NOTIFICATION_DELETE_OK:
       return {
         ...initialStateNotification,
         open: true,
         type:"success",
-        message: "Объект удален"
+        message: "Задача удалена"
       }
     case NOTIFICATION_ERROR:
       return {

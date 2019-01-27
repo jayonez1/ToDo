@@ -126,7 +126,7 @@ const FormDefault = Form.create({
       <Form.Item >
         {
           (props.dataSource.typeForm === "create")
-            ? <Button type="primary" onClick={(e) => handleSubmit(e, props.sendCreate)}>Создать</Button>
+            ? <Button type="primary" onClick={(e) => handleSubmit(e, props.sendCreate)}>Создать задачу</Button>
             : null
         }
         {
@@ -134,7 +134,7 @@ const FormDefault = Form.create({
             ? <div className="form__botomButton">
                 <Button type="primary" onClick={(e) => handleSubmit(e, props.sendEdit)}>Сохранить изменения</Button>
                 <Popconfirm placement="topRight" title={"Удалить ?"} onConfirm={clickYesDelete} okText="Yes" cancelText="No">
-                  <Button type="danger" >Удалить Объект</Button>
+                  <Button type="danger" >Удалить задачу</Button>
                 </Popconfirm>
               </div>
             : null
