@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import App from './containers/App';
 import WeekPage from './containers/WeekPage';
+import MonthPage from './containers/MonthPage';
 
 import routes from "./constants/routes.json"
 
@@ -56,6 +57,7 @@ class Routers extends React.Component {
               <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                 <Switch>
                   <Route path={routes.WEEK} component={WeekPage} />
+                  <Route path={routes.MONTH} component={MonthPage} />
                 </Switch>
               </div>
             </Content>

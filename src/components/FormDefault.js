@@ -108,13 +108,7 @@ const FormDefault = Form.create({
       </Form.Item>
       <Form.Item label="Рейтинг задачи" >
         {
-          getFieldDecorator("rate", {
-            initialValue: 0,
-            rules: [{
-               required: true,
-               message: "Задайте задаче рейтинг"
-             }]
-          })(
+          getFieldDecorator("rate")(
             <Rate onChange={(value) => {props.onChangeItem({ nameField: "rate", value })}} />
           )
         }

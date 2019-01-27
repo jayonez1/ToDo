@@ -10,19 +10,27 @@ import {
 } from "./drawerFormActions"
 
 export const SWITCH_TAB = "SWITCH-TAB";
-export const SWITCH_WEEK = "SWITCH-WEEK";
-export const RESET_WEEK = "RESET-WEEK";
-export const TASKS_ON_DAY = "TASKS_ON_DAY-WEEK";
-export const NEW_EL = "NEW_EL-WEEK";
-export const SET_EDIT = "SET_EDIT-WEEK";
-export const EDIT_FIELD = "EDIT_FIELD-WEEK";
+export const SWITCH_MONTH = "SWITCH-MONTH";
+export const RESET_MONTH = "RESET-MONTH";
+export const TASKS_ON_DAY = "TASKS_ON_DAY-MONTH";
+export const NEW_EL = "NEW_EL-MONTH";
+export const SET_EDIT = "SET_EDIT-MONTH";
+export const EDIT_FIELD = "EDIT_FIELD-MONTH";
 
 const searchTasks = (dateStart) => getAllTasks().filter( task =>
   moment(task.dateTimeStart, "DD-MM-YYYY HH:mm").format("DD-MM-YYYY") === dateStart
 )
+const createDaysMonth = (selectDay) => {
+  const daysInMonth = moment(selectDay, "DD-MM-YYYY").daysInMonth();
+  const days = [];
+  for (var i = 1; i <= daysInMonth; i++){
+    days.push(moment(selectDay, "DD-MM-YYYY").date(i).format("DD-MM-YYYY"))
+  }
+  return days
+}
 
-export const switchTabs = (tabKey, firstWeekDate) => dispatch => {
-  const selectDay = moment(firstWeekDate, "DD-MM-YYYY").isoWeekday(+tabKey).format("DD-MM-YYYY")
+export const switchTabs = (tabKey, selectFirst) => dispatch => {
+  const selectDay = moment(selectFirst, "DD-MM-YYYY").date(+tabKey).format("DD-MM-YYYY")
   const tasksOnDay = searchTasks(selectDay);
   dispatch({
     type: TASKS_ON_DAY,
@@ -37,60 +45,64 @@ export const switchTabs = (tabKey, firstWeekDate) => dispatch => {
   })
 }
 
-export const resetWeek = () => dispatch => {
+export const resetMonth = () => dispatch => {
+  const daysInMonth = moment().daysInMonth();
   const selectDay = moment().format("DD-MM-YYYY");
-  const selectTabs = moment().isoWeekday();
-  const firstWeekDate = moment().isoWeekday(1).format("DD-MM-YYYY");
-  const lastWeekDate =  moment().isoWeekday(7).format("DD-MM-YYYY");
+  const selectTabs = moment().date();
+  const firstMonthDate = moment().date(1).format("DD-MM-YYYY");
+  const lastMonthDate = moment().date(daysInMonth).format("DD-MM-YYYY");
+  const daysMonth = createDaysMonth(selectDay);
   const tasksOnDay = searchTasks(selectDay);
   dispatch({
     type: TASKS_ON_DAY,
     payload: tasksOnDay
   })
   dispatch({
-    type: RESET_WEEK,
-    payload: { selectDay, selectTabs, firstWeekDate, lastWeekDate }
+    type: RESET_MONTH,
+    payload: { daysInMonth, selectDay, selectTabs, daysMonth, firstMonthDate, lastMonthDate }
   })
 }
 
-export const nextWeek = (weekDays) => dispatch => {
-  const {selectFirst, selectLast} = weekDays;
-  const firstWeekDate = moment(selectFirst, "DD-MM-YYYY").add(1, 'week').format("DD-MM-YYYY");
-  const lastWeekDate = moment(selectLast, "DD-MM-YYYY").add(1, 'week').format("DD-MM-YYYY");
+export const nextMonth = (selectFirst) => dispatch => {
+  const daysInMonth = moment(selectFirst, "DD-MM-YYYY").add(1, "month").daysInMonth();
+  const firstMonthDate = moment(selectFirst, "DD-MM-YYYY").add(1, "month").date(1).format("DD-MM-YYYY");
+  const lastMonthDate = moment(selectFirst, "DD-MM-YYYY").add(1, "month").date(daysInMonth).format("DD-MM-YYYY");
   const selectTabs = (
-    moment().isoWeek() === moment(firstWeekDate, "DD-MM-YYYY").isoWeek()
-    && moment().year() === moment(firstWeekDate, "DD-MM-YYYY").year()
-  ) ? moment().isoWeekday() : 1;
-  const selectDay = moment(firstWeekDate, "DD-MM-YYYY").isoWeekday(+selectTabs).format("DD-MM-YYYY");
+    moment().month() ===  moment(firstMonthDate, "DD-MM-YYYY").month()
+    && moment().year() ===  moment(firstMonthDate, "DD-MM-YYYY").year()
+  ) ? moment().date() : 1;
+  const selectDay = moment(firstMonthDate, "DD-MM-YYYY").date(+selectTabs).format("DD-MM-YYYY");
+  const daysMonth = createDaysMonth(selectDay);
   const tasksOnDay = searchTasks(selectDay);
   dispatch({
     type: TASKS_ON_DAY,
     payload: tasksOnDay
   })
   dispatch({
-    type: SWITCH_WEEK,
-    payload: { firstWeekDate, lastWeekDate, selectTabs, selectDay }
+    type: RESET_MONTH,
+    payload: { daysInMonth, selectDay, selectTabs, daysMonth, firstMonthDate, lastMonthDate }
   })
 }
 
-export const prevWeek = (weekDays) => dispatch => {
-  const {selectFirst, selectLast} = weekDays;
-  const firstWeekDate = moment(selectFirst, "DD-MM-YYYY").subtract(1, 'week').format("DD-MM-YYYY");
-  const lastWeekDate = moment(selectLast, "DD-MM-YYYY").subtract(1, 'week').format("DD-MM-YYYY");
+export const prevMonth = (selectFirst) => dispatch => {
+  const daysInMonth = moment(selectFirst, "DD-MM-YYYY").subtract(1, "month").daysInMonth();
+  const firstMonthDate = moment(selectFirst, "DD-MM-YYYY").subtract(1, "month").date(1).format("DD-MM-YYYY");
+  const lastMonthDate = moment(selectFirst, "DD-MM-YYYY").subtract(1, "month").date(daysInMonth).format("DD-MM-YYYY");
   const selectTabs = (
-    moment().isoWeek() === moment(firstWeekDate, "DD-MM-YYYY").isoWeek()
-    && moment().year() === moment(firstWeekDate, "DD-MM-YYYY").year()
-  ) ? moment().isoWeekday() : 1;
-  const selectDay = moment(firstWeekDate, "DD-MM-YYYY").isoWeekday(+selectTabs).format("DD-MM-YYYY");
+    moment().month() ===  moment(firstMonthDate, "DD-MM-YYYY").month()
+    && moment().year() ===  moment(firstMonthDate, "DD-MM-YYYY").year()
+  ) ? moment().date() : 1;
+  const selectDay = moment(firstMonthDate, "DD-MM-YYYY").date(+selectTabs).format("DD-MM-YYYY");
+  const daysMonth = createDaysMonth(selectDay);
   const tasksOnDay = searchTasks(selectDay);
   dispatch({
     type: TASKS_ON_DAY,
     payload: tasksOnDay
   })
   dispatch({
-    type: SWITCH_WEEK,
-    payload: { firstWeekDate, lastWeekDate, selectTabs, selectDay }
-   })
+    type: RESET_MONTH,
+    payload: { daysInMonth, selectDay, selectTabs, daysMonth, firstMonthDate, lastMonthDate }
+  })
 }
 
 export const createTask = () => dispatch => {
