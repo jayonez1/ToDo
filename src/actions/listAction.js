@@ -18,6 +18,7 @@ export const EDIT_FIELD = "EDIT_FIELD-LIST";
 
 const searchTasks = (key) => {
   const tasks = []
+  if (key === "all") tasks.push(...getAllTasks());
   if (key === "today") tasks.push(...searchTasksToday());
   if (key === "tomorrow") tasks.push(...searchTasksTomorrow());
   if (key === "week") tasks.push(...searchTasksWeek());

@@ -37,10 +37,10 @@ class Routers extends React.Component {
             onCollapse={this.onCollapse}
           >
             <Menu theme="dark" mode="inline">
-              <Menu.Item key="Лист дел">
+              <Menu.Item key="Лист задач">
                 <Link to={routes.LIST}>
                   <Icon type="profile" />
-                  <span>Лист задачь</span>
+                  <span>Лист задач</span>
                 </Link>
               </Menu.Item>
               <SubMenu

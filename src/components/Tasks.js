@@ -45,14 +45,21 @@ class Tasks extends PureComponent {
                  record =>
                    <div style={{ margin: 0 }}>
                      <h4> Описание задачи:</h4> <p style={{maxWidth: "750px", wordWrap: "break-word", textAlign: "justify"}}>{record.description}</p>
-                     <h4 style={{ margin: '16px 0' }}>Участники: </h4>
-                     <List
-                       size="small"
-                       bordered
-                       dataSource={record.participants}
-                       className="taskTable__participantsList"
-                       renderItem={item => (<List.Item>{item.name}</List.Item>)}
-                     />
+                     <h4 style={{ margin: '16px 0' }}>
+                       Участники: {(record.participants && record.participants.length > 0) ? null : "Нет"}
+                     </h4>
+                     {
+                       (record.participants && record.participants.length > 0)
+                        ? <List
+                            size="small"
+                            bordered
+                            dataSource={record.participants}
+                            className="taskTable__participantsList"
+                            renderItem={item => (<List.Item>{item.name}</List.Item>)}
+                          />
+                        : null
+                     }
+
                    </div>
                }
              />

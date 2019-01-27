@@ -29,19 +29,22 @@ class Month extends PureComponent {
           onTabClick={ (tabKey) => switchTabs(tabKey) }
           tabPosition="top"
         >
+          <TabPane tab="Все" key="all">
+              <Tasks tasks={tasks} editTask={(props) => editTask(props)}/>
+          </TabPane>
           <TabPane tab="Сегодня" key="today">
               <Tasks tasks={tasks} editTask={(props) => editTask(props)}/>
           </TabPane>
           <TabPane tab="Завтра" key="tomorrow">
             <Tasks tasks={tasks} editTask={(props) => editTask(props)}/>
           </TabPane>
-          <TabPane tab="Неделя" key="week">
+          <TabPane tab="На этой неделе" key="week">
             <Tasks tasks={tasks} editTask={(props) => editTask(props)}/>
           </TabPane>
-          <TabPane tab="Месяц" key="month">
+          <TabPane tab="В этом месяце" key="month">
             <Tasks tasks={tasks} editTask={(props) => editTask(props)}/>
           </TabPane>
-          <TabPane tab="Год" key="year">
+          <TabPane tab="В этом году" key="year">
             <Tasks tasks={tasks} editTask={(props) => editTask(props)}/>
           </TabPane>
         </Tabs>
