@@ -3,8 +3,6 @@ import {
   DRIWER_FORM_CLOSE,
   NOTIFICATION_CREATE_OK,
   NOTIFICATION_EDIT_OK,
-  NOTIFICATION_IMAGE_OK,
-  NOTIFICATION_IMAGE_DELETE,
   NOTIFICATION_DELETE_OK,
   NOTIFICATION_ERROR,
   NOTIFICATION_RESET
@@ -51,20 +49,6 @@ export function formNotification(state = initialStateNotification, action) {
         open: true,
         type:"success",
         message: "Объект удален"
-      }
-    case NOTIFICATION_IMAGE_OK:
-      return {
-        open: true,
-        type:"info",
-        message: "Изображение загружено",
-        description: "Для сохранения результата: сохраните объект"
-      }
-    case NOTIFICATION_IMAGE_DELETE:
-      return {
-        open: true,
-        type:"info",
-        message: "Изображение удалено",
-        description: "Для сохранения результата: сохраните объект"
       }
     case NOTIFICATION_ERROR:
       return {

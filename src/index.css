@@ -46,3 +46,20 @@ a, a:active, a:hover, a:visited { outline: none!important; text-decoration: none
 .controls__newTask{
   align-self: flex-end;
 }
+.participants{
+  border-top: solid 1px #e8e8e8;
+  border-bottom: solid 1px #e8e8e8;
+  padding: 10px 0px;
+  margin-bottom: 15px;
+}
+.list__participantItem{
+  display: flex;
+  justify-content: space-between;
+}
+.list__participantItem p{
+  align-self: center;
+}
+.participants__addNewParticipants{
+  display: flex;
+  justify-content: space-between;
+}

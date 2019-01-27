@@ -3,6 +3,7 @@ import moment from "moment"
 import {
   Form, Input, Popconfirm, Button, DatePicker, Rate
 } from 'antd';
+import ParticipantsForm from './ParticipantsForm'
 import locale from 'antd/lib/date-picker/locale/ru_RU';
 
 const { TextArea } = Input;
@@ -115,6 +116,11 @@ const FormDefault = Form.create({
           )
         }
       </Form.Item>
+
+      <ParticipantsForm
+        participants = {props.dataSource.participants}
+        updateParticipants={(arr) => {props.onChangeItem({ nameField: "participants", value: arr })}}
+      />
 
       <Form.Item >
         {

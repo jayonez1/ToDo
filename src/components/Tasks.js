@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Table, Empty, Button, Icon, List } from 'antd';
+import { Table, Empty, Icon, List } from 'antd';
 
 const columns = [
   { title: 'Название задачи', dataIndex: 'title', key: 'title' },
@@ -51,7 +51,7 @@ class Tasks extends PureComponent {
                        bordered
                        dataSource={record.participants}
                        className="taskTable__participantsList"
-                       renderItem={item => (<List.Item>{item}</List.Item>)}
+                       renderItem={item => (<List.Item>{item.name}</List.Item>)}
                      />
                    </div>
                }
