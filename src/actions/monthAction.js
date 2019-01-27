@@ -9,7 +9,7 @@ import {
   DRIWER_FORM_OPEN
 } from "./drawerFormActions"
 
-export const SWITCH_TAB = "SWITCH-TAB";
+export const SWITCH_TAB = "SWITCH_TAB-MONTH";
 export const SWITCH_MONTH = "SWITCH-MONTH";
 export const RESET_MONTH = "RESET-MONTH";
 export const TASKS_ON_DAY = "TASKS_ON_DAY-MONTH";

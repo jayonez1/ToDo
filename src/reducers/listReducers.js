@@ -1,31 +1,18 @@
-import moment from "moment"
 import {
-  SWITCH_MONTH,
-  RESET_MONTH,
+  RESET_LIST,
   SWITCH_TAB,
-  TASKS_ON_DAY,
+  TASKS_ON_DAYS,
   NEW_EL,
   SET_EDIT,
   EDIT_FIELD
-} from "../actions/monthAction"
+} from "../actions/listAction"
 
-const initialStateMonth = {
-  selectMonth : moment().month(),
-  daysInMonth : moment().daysInMonth(),
-  firstMonthDate: moment().date(1).format("DD-MM-YYYY"),
-  lastMonthDate: moment().date(moment().daysInMonth()).format("DD-MM-YYYY"),
-  selectDay : moment().format("DD-MM-YYYY"),
-  selectTabs : moment().date(),
-  daysMonth: []
+const initialStateList = {
+  selectTabs : "today",
 }
-export function month(state = initialStateMonth, action) {
+export function list(state = initialStateList, action) {
   switch (action.type) {
-    case SWITCH_MONTH:
-      return{
-        ...state,
-        ...action.payload
-      };
-    case RESET_MONTH:
+    case RESET_LIST:
       return action.payload;
     case SWITCH_TAB:
       return{
@@ -37,16 +24,16 @@ export function month(state = initialStateMonth, action) {
   }
 }
 
-export function monthTasksOnDay(state = [], action) {
+export function listTasksOnDays(state = [], action) {
   switch (action.type) {
-    case TASKS_ON_DAY:
+    case TASKS_ON_DAYS:
       return action.payload;
     default:
       return state
   }
 }
 
-export function monthForm (state = {}, action) {
+export function listForm (state = {}, action) {
   switch (action.type) {
     case NEW_EL:
       return {

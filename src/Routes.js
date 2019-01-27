@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import App from './containers/App';
 import WeekPage from './containers/WeekPage';
 import MonthPage from './containers/MonthPage';
+import ListPage from './containers/ListPage';
 
 import routes from "./constants/routes.json"
 
@@ -39,7 +40,7 @@ class Routers extends React.Component {
               <Menu.Item key="Лист дел">
                 <Link to={routes.LIST}>
                   <Icon type="profile" />
-                  <span>Лист дел</span>
+                  <span>Лист задачь</span>
                 </Link>
               </Menu.Item>
               <SubMenu
@@ -58,6 +59,7 @@ class Routers extends React.Component {
                 <Switch>
                   <Route path={routes.WEEK} component={WeekPage} />
                   <Route path={routes.MONTH} component={MonthPage} />
+                  <Route path={routes.LIST} component={ListPage} />
                 </Switch>
               </div>
             </Content>
