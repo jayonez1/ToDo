@@ -29,7 +29,7 @@ const searchTasksOneDay = (date) => getAllTasks().filter( task =>
   moment(task.dateTimeStart, "DD-MM-YYYY HH:mm").format("DD-MM-YYYY") === date
 )
 const searchTasksToday = () => searchTasksOneDay(moment().format("DD-MM-YYYY"));
-const searchTasksTomorrow = () => searchTasksOneDay(moment().day(1).format("DD-MM-YYYY"));
+const searchTasksTomorrow = () => searchTasksOneDay(moment().add(1, 'day').format("DD-MM-YYYY"));
 const searchTasksWeek = () => {
   const week = [];
   for (var i = 1; i <= 7; i++) {
