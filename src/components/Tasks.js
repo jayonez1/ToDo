@@ -1,12 +1,31 @@
 import React, { PureComponent } from 'react';
+import moment from "moment";
 import { Table, Empty, Icon, List } from 'antd';
 
 const columns = [
   { title: 'Название задачи', dataIndex: 'title', key: 'title' },
-  { title: 'Начало', dataIndex: 'start', key: 'start', align:"center" },
-  { title: 'Окончание', dataIndex: 'over', key: 'over', align:"center" },
+  {
+    title: 'Начало',
+    dataIndex: 'start',
+    key: 'start',
+    align:"center",
+    sorter: (a, b) => moment(a.start, "DD-MM-YYYY HH:mm").format('X')-moment(b.start, "DD-MM-YYYY HH:mm").format('X')
+  },
+  {
+    title: 'Окончание',
+    dataIndex: 'over',
+    key: 'over',
+    align:"center",
+    sorter: (a, b) => moment(a.over, "DD-MM-YYYY HH:mm").format('X')-moment(b.over, "DD-MM-YYYY HH:mm").format('X')
+  },
   { title: 'Важность', dataIndex: 'rate', key: 'rate', align:"center" },
-  { title: 'Кол-во участников', dataIndex: 'numberParticipants', key: 'numberParticipants', align:"center" },
+  {
+    title: 'Кол-во участников',
+    dataIndex: 'numberParticipants',
+    key: 'numberParticipants',
+    align:"center",
+    sorter: (a, b) => a.numberParticipants - b.numberParticipants
+  },
   { title: '', dataIndex: 'editTast', key: 'editTast', align:"center"  },
 ];
 
