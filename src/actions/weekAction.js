@@ -19,7 +19,9 @@ export const EDIT_FIELD = "EDIT_FIELD-WEEK";
 
 const searchTasks = (dateStart) => getAllTasks().filter( task =>
   moment(task.dateTimeStart, "DD-MM-YYYY HH:mm").format("DD-MM-YYYY") === dateStart
-)
+).sort(function(a, b){
+  return moment(a.dateTimeStart, "DD-MM-YYYY HH:mm").format('X')-moment(b.dateTimeStart, "DD-MM-YYYY HH:mm").format('X')
+})
 
 export const switchTabs = (tabKey, firstWeekDate) => dispatch => {
   const selectDay = moment(firstWeekDate, "DD-MM-YYYY").isoWeekday(+tabKey).format("DD-MM-YYYY")

@@ -19,7 +19,11 @@ export const EDIT_FIELD = "EDIT_FIELD-MONTH";
 
 const searchTasks = (dateStart) => getAllTasks().filter( task =>
   moment(task.dateTimeStart, "DD-MM-YYYY HH:mm").format("DD-MM-YYYY") === dateStart
-)
+).sort(function(a, b){
+  return moment(a.dateTimeStart, "DD-MM-YYYY HH:mm").format('X')-moment(b.dateTimeStart, "DD-MM-YYYY HH:mm").format('X')
+})
+
+
 const createDaysMonth = (selectDay) => {
   const daysInMonth = moment(selectDay, "DD-MM-YYYY").daysInMonth();
   const days = [];

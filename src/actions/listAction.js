@@ -16,6 +16,7 @@ export const NEW_EL = "NEW_EL-LIST";
 export const SET_EDIT = "SET_EDIT-LIST";
 export const EDIT_FIELD = "EDIT_FIELD-LIST";
 
+
 const searchTasks = (key) => {
   const tasks = []
   if (key === "all") tasks.push(...getAllTasks());
@@ -24,7 +25,9 @@ const searchTasks = (key) => {
   if (key === "week") tasks.push(...searchTasksWeek());
   if (key === "month") tasks.push(...searchTasksMonth());
   if (key === "year") tasks.push(...searchTasksYear());
-  return tasks
+  return tasks.sort(function(a, b){
+    return moment(a.dateTimeStart, "DD-MM-YYYY HH:mm").format('X')-moment(b.dateTimeStart, "DD-MM-YYYY HH:mm").format('X')
+  });
 }
 const searchTasksOneDay = (date) => getAllTasks().filter( task =>
   moment(task.dateTimeStart, "DD-MM-YYYY HH:mm").format("DD-MM-YYYY") === date
